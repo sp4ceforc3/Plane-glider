@@ -1,16 +1,33 @@
 using UnityEngine;
-using UnityEngine.UI;   // This contains Image, Slider and the legacy Text
-using TMPro;            // This contains TextMeshProUGUI, which you should use for text
-using UnityEngine.Audio;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
 public class LevelLoader : MonoBehaviour
 {
-    // Enumerator for Level: 
+    // Enumerator for Level / Scenes: 
     //      0 -> MainMenu
     //      1 -> LinusLevel
     //      2 -> DomaiLevel
-    private enum Level { MainMenu, LinusLevel, DomaiLevel }
+    public enum Level { MainMenu, LinusLevel, DomaiLevel }
+
+    // Has the player successfully finished the level?
+    public static Dictionary<Level, bool> finishedLevel = new Dictionary<Level, bool>() {
+        { Level.LinusLevel, false },
+        { Level.DomaiLevel, false },
+    };
+
+    // Level Checkmarks
+    [SerializeField] GameObject checkMarkLinusLevel;
+    [SerializeField] GameObject checkMarkDomaiLevel;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        // At start the player doesn't finished any level
+        checkMarkLinusLevel.gameObject.SetActive(finishedLevel[Level.LinusLevel]);
+        checkMarkDomaiLevel.gameObject.SetActive(finishedLevel[Level.DomaiLevel]);
+    }
     
     // Audio
     [SerializeField] AudioSource bgmSrc;
@@ -18,18 +35,33 @@ public class LevelLoader : MonoBehaviour
 
     // Start Game at UI Click in Main Menu.
     // int level = 
-    //      0   -> LinusLevel
-    //      1   -> DomaiLevel
+    //      1  -> LinusLevel
+    //      2  -> DomaiLevel
     // Everthing else will return in a resetting of the game.
     // => Loading Main Menu again.
     public void startLevel(int level) 
     {
         sfxSrc.PlayOneShot(sfxSrc.clip);
         try {
-            Debug.Log($"Level: {(Level)level}");
             SceneManager.LoadScene(((Level)level).ToString());
         } catch {
             SceneManager.LoadScene(Level.MainMenu.ToString());
         }
+    }
+
+    // Quit Completly
+    // Quit the game in Unity Editor too:
+    /*    https://stackoverflow.com/questions/70437401/cannot-finish-the-game-in-unity-using-application-quit 
+          https://answers.unity.com/questions/161858/startstop-playmode-from-editor-script.html
+    */
+    public void Quit() 
+    {
+        #if UNITY_STANDALONE
+            Application.Quit();
+        #endif
+        #if UNITY_EDITOR
+            // UnityEditor.EditorisPlaying = false; // newer version than 2021.3
+            UnityEditor.EditorApplication.isPlaying = false; // for version 2021.3
+        #endif
     }
 }
