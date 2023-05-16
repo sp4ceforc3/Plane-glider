@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Plane : MonoBehaviour
 {
+    // GameObject the Plane can collide of
+    private enum CollisionObjects { Floor, Roof, Finish }
+
     [SerializeField] float speed = 1f;
     [SerializeField] float jumpForce = 5f;
 
@@ -23,9 +27,6 @@ public class Plane : MonoBehaviour
     float timer;
     int spriteIndex = 0;
 
-    private void Awake() {
-        
-    }
     // Start is called before the first frame update
     void Start()
     {
@@ -33,9 +34,6 @@ public class Plane : MonoBehaviour
         rigBody = GetComponent<Rigidbody2D>();
         fuelText.text = "100";
         planeTransform = this.transform;
-    }
-
-    void fixedUpdate(){
     }
 
     // Update is called once per frame
@@ -81,6 +79,17 @@ public class Plane : MonoBehaviour
         //planeTransform.rotation = Quaternion.Lerp(planeTransform.rotation, Quaternion.LookRotation(new Vector3(rigBody.velocity.x, rigBody.velocity.y, 0)), Time.deltaTime * 1f);
         
         if(Input.GetKeyUp("space"))
-                audioSource.mute = true;
+            audioSource.mute = true;
     }
+
+    //? TODO: Implement item collission either as trigger or use if-else here
+    private void OnCollisionEnter2D(Collision2D collision) {
+        // switch (collision.gameObject.name)
+        // {
+        //     case CollisionObjects.Floor:
+        //         SceneManager.LoadScene("MainMenu");
+        //     default:
+        //         break;
+        // }
+    } 
 }
