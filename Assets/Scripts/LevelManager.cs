@@ -19,6 +19,11 @@ public class LevelManager : MonoBehaviour
     [SerializeField] GameObject restartButton;
     [SerializeField] TextMeshProUGUI endText;
 
+    // Audio
+    [SerializeField] AudioSource sfxSrc;
+    [SerializeField] AudioClip winningSound;
+    [SerializeField] AudioClip losingSound;
+
     // Gamestates
     public enum GameState { Playing, Won, Lose }
     public GameState gameState;
@@ -52,11 +57,16 @@ public class LevelManager : MonoBehaviour
     public void LoadEndScreen(GameState state) 
     {
         gameState = state;
+        sfxSrc.mute = false;
+        sfxSrc.loop = false;
+        
         if (state == GameState.Won) {
             endText.text = "You win!";
+            sfxSrc.PlayOneShot(winningSound);
             LevelLoader.finishedLevel[levelName] = true;
         } else {
             endText.text = "You lose!";
+            sfxSrc.PlayOneShot(losingSound);
             restartButton.SetActive(true);
         }
         
