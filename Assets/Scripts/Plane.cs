@@ -69,7 +69,6 @@ public class Plane : MonoBehaviour
 
             if (Input.GetKey(KeyCode.Space) && fuel > 0) {
                 fuel -= 0.2f * Time.deltaTime;
-                sfxSrc.PlayOneShot(sfxSrc.clip);
                 rigBody.velocity = new Vector2(rigBody.velocity.x, jumpForce);
                 if (fuel <= 0)
                     fuelText.text = "Empty";
@@ -83,6 +82,15 @@ public class Plane : MonoBehaviour
         } else {
             rigBody.AddForce(Physics.gravity * 1.2f);
         }
+    }
+
+    // Called on each frame load
+    void Update() 
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && fuel > 0)
+            sfxSrc.mute = false;
+        else if (Input.GetKeyUp(KeyCode.Space) || fuel <= 0)
+            sfxSrc.mute = true;
     }
 
     // Detect and handle collision with other objects
