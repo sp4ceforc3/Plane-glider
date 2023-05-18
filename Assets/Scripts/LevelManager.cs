@@ -75,7 +75,7 @@ public class LevelManager : MonoBehaviour
 
         // deactivate all colliders beside flood
         foreach (Collider2D collider in colliders) {
-            if (collider.gameObject.name != nameof(CollisionObjects.Floor))
+            if (collider.gameObject.tag != "Ground")
                 collider.enabled = false;
         }
     }
