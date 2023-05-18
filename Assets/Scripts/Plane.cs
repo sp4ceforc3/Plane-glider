@@ -46,17 +46,11 @@ public class Plane : MonoBehaviour
             rigBody.velocity = new Vector2(speed, rigBody.velocity.y);
             
             var dir = rigBody.velocity;
-            //TODO: this rotation is laggy as hell
-            // but wasted already a lot of time here.....
-            // in fixedUpdate it does nothing for some reason
-            // tried many rigidbody2D codes but nothin worked...
-
             var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             planeTransform.rotation = Quaternion.Euler(0f, 0f, angle);
             
             timer += Time.deltaTime;
 
-        
             // This will be called when our timer reaches the specified time (and the array contains sprites)
             if (timer >= animationTime) {
                 // Load the next sprite and loop around when end of the array is reached
