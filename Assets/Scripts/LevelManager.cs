@@ -8,10 +8,11 @@ using UnityEngine.SceneManagement;
 public class LevelManager : MonoBehaviour
 {
     // GameObject the Plane can collide of.
-    // Floor  = Ground coliders game object
-    // Roof   = Top coliders game object
-    // Finish = Colider that indicates when a level is finished.
-    public enum CollisionObjects { Floor, Roof, Finish }
+    // Ground   = Ground coliders game object
+    // Item     = Collactable to refuel.
+    // Obstacle = Obstacle and ceiling game object
+    // Finish   = Colider that indicates when a level is finished.
+    public enum CollisionObjects { Ground, Item, Obstacle, Finish }
 
     // UI
     [SerializeField] GameObject fuelUI;
@@ -21,8 +22,10 @@ public class LevelManager : MonoBehaviour
 
     // Audio
     [SerializeField] AudioSource sfxSrc;
+    [SerializeField] AudioSource bgmSrc;
     [SerializeField] AudioClip winningSound;
     [SerializeField] AudioClip losingSound;
+    [SerializeField] AudioClip collectSound;
 
     // Gamestates
     public enum GameState { Playing, Won, Lose }
@@ -41,10 +44,6 @@ public class LevelManager : MonoBehaviour
         // levelName = name of current scene
         if (SceneManager.GetActiveScene().name != "LevelTemplate")
             levelName = (LevelLoader.Level)System.Enum.Parse(typeof(LevelLoader.Level), SceneManager.GetActiveScene().name);
-        // get colliders in world
-        GameObject world = GameObject.Find("World");
-        Debug.Log(world.GetComponentsInChildren<Collider2D>());
-        colliders = world.GetComponentsInChildren<Collider2D>();
     }
 
     // Update is called once per frame
@@ -54,11 +53,11 @@ public class LevelManager : MonoBehaviour
             MainMenu();
     }
 
+    // Stop the game and show endscreen UI
     public void LoadEndScreen(GameState state) 
     {
         gameState = state;
-        sfxSrc.mute = false;
-        sfxSrc.loop = false;
+        bgmSrc.mute = true;
         
         if (state == GameState.Won) {
             endText.text = "You win!";
@@ -73,11 +72,26 @@ public class LevelManager : MonoBehaviour
         fuelUI.SetActive(false);
         endScreen.SetActive(true);
 
-        // deactivate all colliders beside flood
+        // deactivate all colliders beside ground
+        GameObject world = GameObject.Find("World");
+        colliders = world.GetComponentsInChildren<Collider2D>();
         foreach (Collider2D collider in colliders) {
-            if (collider.gameObject.tag != "Ground")
+            if (collider.gameObject.tag != nameof(CollisionObjects.Ground))
                 collider.enabled = false;
         }
+    }
+
+    // Handle Item collection
+    public void HandleItem(GameObject item) 
+    {
+        sfxSrc.PlayOneShot(collectSound);
+
+        if (item.GetComponent<Refueler>()) {
+            Refueler refueler = item.GetComponent<Refueler>();
+            refueler.Refuel();
+        }
+
+        Destroy(item);
     }
 
     // Restart Gane = Reset Scene

@@ -15,17 +15,17 @@ public class Plane : MonoBehaviour
 
     [SerializeField] float animationTime = 0.1f;
     [SerializeField] Sprite[] moveSprites;
-    [SerializeField] AudioSource sfxSrc;
+    [SerializeField] AudioSource planeSrc;
     [SerializeField] TextMeshProUGUI fuelText;
     [SerializeField] Image fuelBar;
     
-    Transform planeTransform;
-    Rigidbody2D rigBody;
-    SpriteRenderer sr;
-    float fuel = 1f;
+    private Transform planeTransform;
+    private Rigidbody2D rigBody;
+    private SpriteRenderer sr;
+    public float fuel = 1f;
 
-    float timer;
-    int spriteIndex = 0;
+    private float timer;
+    private int spriteIndex = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -81,10 +81,14 @@ public class Plane : MonoBehaviour
     // Called on each frame load
     void Update() 
     {
-        if (Input.GetKeyDown(KeyCode.Space) && fuel > 0)
-            sfxSrc.mute = false;
-        else if (Input.GetKeyUp(KeyCode.Space) || fuel <= 0)
-            sfxSrc.mute = true;
+        // completly ignore anything if the game ends
+        if (levelManager.gameState == LevelManager.GameState.Playing) 
+        {
+            if (Input.GetKeyDown(KeyCode.Space) && fuel > 0)
+                planeSrc.mute = false;
+            else if (Input.GetKeyUp(KeyCode.Space))
+                planeSrc.mute = true;
+        }
     }
 
     // Detect and handle collision with other objects
@@ -92,27 +96,28 @@ public class Plane : MonoBehaviour
         if (levelManager.gameState == LevelManager.GameState.Playing) {
             switch (collision.gameObject.tag)
             {
-                //** Floor
-                case "Ground":
-                    levelManager.LoadEndScreen(LevelManager.GameState.Lose);
-                    break;
-                case "Obstacle":
+                //** Ground
+                case nameof(LevelManager.CollisionObjects.Ground):
                     levelManager.LoadEndScreen(LevelManager.GameState.Lose);
                     break;
 
-                //** Roof
-                case "Roof":
-                    // do nothing
+                //** Items
+                case nameof(LevelManager.CollisionObjects.Item):
+                    levelManager.HandleItem(collision.gameObject);
+                    break;
+
+                //** Obstacle
+                case nameof(LevelManager.CollisionObjects.Obstacle):
+                    levelManager.LoadEndScreen(LevelManager.GameState.Lose);
                     break;
 
                 //** Finish
-                case "Finish":
+                case nameof(LevelManager.CollisionObjects.Finish):
                     levelManager.LoadEndScreen(LevelManager.GameState.Won);
                     break;
 
                 default:
-                    // Some unexpected collission should reset the whole game.
-                    SceneManager.LoadScene("MainMenu");
+                    // Do nothing. E.g. at ceiling collision
                     break;
             }
         }
