@@ -15,7 +15,7 @@ public class Plane : MonoBehaviour
 
     [SerializeField] float animationTime = 0.1f;
     [SerializeField] Sprite[] moveSprites;
-    [SerializeField] AudioSource sfxSrc;
+    [SerializeField] AudioSource planeSrc;
     [SerializeField] TextMeshProUGUI fuelText;
     [SerializeField] Image fuelBar;
     
@@ -81,10 +81,14 @@ public class Plane : MonoBehaviour
     // Called on each frame load
     void Update() 
     {
-        if (Input.GetKeyDown(KeyCode.Space) && fuel > 0)
-            sfxSrc.mute = false;
-        else if (Input.GetKeyUp(KeyCode.Space) || fuel <= 0)
-            sfxSrc.mute = true;
+        // completly ignore anything if the game ends
+        if (levelManager.gameState == LevelManager.GameState.Playing) 
+        {
+            if (Input.GetKeyDown(KeyCode.Space) && fuel > 0)
+                planeSrc.mute = false;
+            else if (Input.GetKeyUp(KeyCode.Space))
+                planeSrc.mute = true;
+        }
     }
 
     // Detect and handle collision with other objects

@@ -44,10 +44,6 @@ public class LevelManager : MonoBehaviour
         // levelName = name of current scene
         if (SceneManager.GetActiveScene().name != "LevelTemplate")
             levelName = (LevelLoader.Level)System.Enum.Parse(typeof(LevelLoader.Level), SceneManager.GetActiveScene().name);
-        // get colliders in world
-        GameObject world = GameObject.Find("World");
-        Debug.Log(world.GetComponentsInChildren<Collider2D>());
-        colliders = world.GetComponentsInChildren<Collider2D>();
     }
 
     // Update is called once per frame
@@ -61,8 +57,6 @@ public class LevelManager : MonoBehaviour
     public void LoadEndScreen(GameState state) 
     {
         gameState = state;
-        sfxSrc.mute = false;
-        sfxSrc.loop = false;
         bgmSrc.mute = true;
         
         if (state == GameState.Won) {
@@ -79,6 +73,8 @@ public class LevelManager : MonoBehaviour
         endScreen.SetActive(true);
 
         // deactivate all colliders beside ground
+        GameObject world = GameObject.Find("World");
+        colliders = world.GetComponentsInChildren<Collider2D>();
         foreach (Collider2D collider in colliders) {
             if (collider.gameObject.tag != nameof(CollisionObjects.Ground))
                 collider.enabled = false;
