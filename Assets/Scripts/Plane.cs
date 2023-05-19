@@ -90,20 +90,23 @@ public class Plane : MonoBehaviour
     // Detect and handle collision with other objects
     private void OnCollisionEnter2D(Collision2D collision) {
         if (levelManager.gameState == LevelManager.GameState.Playing) {
-            switch (collision.gameObject.name)
+            switch (collision.gameObject.tag)
             {
                 //** Floor
-                case nameof(LevelManager.CollisionObjects.Floor):
+                case "Ground":
+                    levelManager.LoadEndScreen(LevelManager.GameState.Lose);
+                    break;
+                case "Obstacle":
                     levelManager.LoadEndScreen(LevelManager.GameState.Lose);
                     break;
 
                 //** Roof
-                case nameof(LevelManager.CollisionObjects.Roof):
+                case "Roof":
                     // do nothing
                     break;
 
                 //** Finish
-                case nameof(LevelManager.CollisionObjects.Finish):
+                case "Finish":
                     levelManager.LoadEndScreen(LevelManager.GameState.Won);
                     break;
 
