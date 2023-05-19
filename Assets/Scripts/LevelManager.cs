@@ -22,6 +22,7 @@ public class LevelManager : MonoBehaviour
 
     // Audio
     [SerializeField] AudioSource sfxSrc;
+    [SerializeField] AudioSource bgmSrc;
     [SerializeField] AudioClip winningSound;
     [SerializeField] AudioClip losingSound;
     [SerializeField] AudioClip collectSound;
@@ -62,6 +63,7 @@ public class LevelManager : MonoBehaviour
         gameState = state;
         sfxSrc.mute = false;
         sfxSrc.loop = false;
+        bgmSrc.mute = true;
         
         if (state == GameState.Won) {
             endText.text = "You win!";
