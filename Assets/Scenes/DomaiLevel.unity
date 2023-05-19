@@ -133,7 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 163653851}
   - component: {fileID: 163653853}
-  - component: {fileID: 163653852}
+  - component: {fileID: 163653854}
   m_Layer: 0
   m_Name: Floor
   m_TagString: Untagged
@@ -159,32 +159,6 @@ Transform:
   m_Father: {fileID: 1854133247}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &163653852
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 163653850}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 12.197445, y: -1.0587316}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 25.39489, y: 0.36496735}
-  m_EdgeRadius: 0
 --- !u!50 &163653853
 Rigidbody2D:
   serializedVersion: 4
@@ -206,6 +180,94 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!68 &163653854
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 163653850}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: 38dfa6b4998aa1b1f9ad7155ab7b78e6, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: 0.3316927, y: 9.042256}
+  - {x: -0.1844101, y: 6.3102317}
+  - {x: -0.18221092, y: 5.402873}
+  - {x: -0.30686092, y: 4.4300003}
+  - {x: -0.3394518, y: -0.22275877}
+  - {x: 0.15546227, y: -0.85915756}
+  - {x: 0.50445175, y: -0.8841367}
+  - {x: 1.2558327, y: -0.81811523}
+  - {x: 1.462678, y: -0.530478}
+  - {x: 2.4160233, y: -0.49487734}
+  - {x: 2.9422665, y: -0.72431946}
+  - {x: 3.4398327, y: -0.7316289}
+  - {x: 3.605672, y: -0.55539703}
+  - {x: 4.227591, y: -0.5694771}
+  - {x: 4.5870686, y: -0.8701534}
+  - {x: 5.043126, y: -0.8448858}
+  - {x: 5.2369103, y: -0.9846816}
+  - {x: 5.609842, y: -0.98417044}
+  - {x: 5.9001694, y: -0.7073741}
+  - {x: 6.2449145, y: -0.671463}
+  - {x: 6.494229, y: -0.48188353}
+  - {x: 7.392167, y: -0.4530468}
+  - {x: 7.5598407, y: -0.6553464}
+  - {x: 7.9737854, y: -0.77359915}
+  - {x: 8.236336, y: -0.749948}
+  - {x: 8.388737, y: -0.8635931}
+  - {x: 8.789489, y: -0.89354706}
+  - {x: 9.34228, y: -0.757329}
+  - {x: 9.465849, y: -0.5272832}
+  - {x: 10.477233, y: -0.4260044}
+  - {x: 10.949918, y: -0.66318846}
+  - {x: 11.470488, y: -0.6900115}
+  - {x: 11.678005, y: -0.55924845}
+  - {x: 12.327293, y: -0.525074}
+  - {x: 12.702541, y: -0.85765076}
+  - {x: 13.115825, y: -0.8492203}
+  - {x: 13.3371, y: -0.96262693}
+  - {x: 13.704673, y: -0.94549656}
+  - {x: 13.95919, y: -0.7137017}
+  - {x: 14.333174, y: -0.66773605}
+  - {x: 14.553718, y: -0.444211}
+  - {x: 15.436937, y: -0.43011856}
+  - {x: 15.606267, y: -0.6928239}
+  - {x: 16.074944, y: -0.8673687}
+  - {x: 16.90387, y: -0.9211664}
+  - {x: 17.35985, y: -0.74600744}
+  - {x: 17.537233, y: -0.55260515}
+  - {x: 18.458601, y: -0.4951229}
+  - {x: 18.993368, y: -0.6841016}
+  - {x: 19.477663, y: -0.74577}
+  - {x: 19.626295, y: -0.56759787}
+  - {x: 20.29322, y: -0.56911707}
+  - {x: 20.647911, y: -0.8475418}
+  - {x: 21.052414, y: -0.84422207}
+  - {x: 21.246466, y: -0.97921133}
+  - {x: 21.700497, y: -0.98695946}
+  - {x: 21.949007, y: -0.71901655}
+  - {x: 22.35518, y: -0.69673824}
+  - {x: 22.497128, y: -0.496974}
+  - {x: 23.366789, y: -0.46330833}
+  - {x: 23.586992, y: -0.73937654}
+  - {x: 24.063486, y: -0.8168454}
+  - {x: 26.278952, y: 0.96726894}
+  - {x: 26.62022, y: 3.7991948}
+  - {x: 26.321234, y: 7.461334}
+  - {x: 26.093395, y: 8.082066}
+  - {x: 25.118732, y: 8.964367}
+  - {x: 24.266027, y: 9.309787}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
 --- !u!1 &195764400
 GameObject:
   m_ObjectHideFlags: 0
@@ -817,7 +879,7 @@ GameObject:
   - component: {fileID: 441290521}
   - component: {fileID: 441290522}
   m_Layer: 0
-  m_Name: bgm_sound
+  m_Name: bgm_source
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1113,6 +1175,7 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
+  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1186,6 +1249,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519420033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d955e2110dc30e4d9e13926c9d0c0ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1412193795}
+  off: {x: 0, y: 0, z: 0}
+  smoothness: 0.175
 --- !u!1 &562863301
 GameObject:
   m_ObjectHideFlags: 0
@@ -1832,7 +1910,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 1ce9acfeb43966b44b282cd0a29f7e72, type: 3}
   - {fileID: 21300000, guid: 85f59f592475c7b4592f2167cd060f7a, type: 3}
   - {fileID: 21300000, guid: 1ce9acfeb43966b44b282cd0a29f7e72, type: 3}
-  audioSource: {fileID: 1415406757}
+  sfxSrc: {fileID: 1415406757}
   fuelText: {fileID: 1403700728}
   fuelBar: {fileID: 1858390087}
 --- !u!58 &1412193797
@@ -2280,6 +2358,9 @@ MonoBehaviour:
   endScreen: {fileID: 630111491}
   restartButton: {fileID: 1713817324}
   endText: {fileID: 2036553643}
+  sfxSrc: {fileID: 0}
+  winningSound: {fileID: 0}
+  losingSound: {fileID: 0}
   gameState: 0
 --- !u!1 &1752162912
 GameObject:

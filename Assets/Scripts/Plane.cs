@@ -92,27 +92,28 @@ public class Plane : MonoBehaviour
         if (levelManager.gameState == LevelManager.GameState.Playing) {
             switch (collision.gameObject.tag)
             {
-                //** Floor
-                case "Ground":
-                    levelManager.LoadEndScreen(LevelManager.GameState.Lose);
-                    break;
-                case "Obstacle":
+                //** Ground
+                case nameof(LevelManager.CollisionObjects.Ground):
                     levelManager.LoadEndScreen(LevelManager.GameState.Lose);
                     break;
 
-                //** Roof
-                case "Roof":
-                    // do nothing
+                //** Items
+                case nameof(LevelManager.CollisionObjects.Item):
+                    // do refuel of fuel
+                    break;
+
+                //** Obstacle
+                case nameof(LevelManager.CollisionObjects.Obstacle):
+                    levelManager.LoadEndScreen(LevelManager.GameState.Lose);
                     break;
 
                 //** Finish
-                case "Finish":
+                case nameof(LevelManager.CollisionObjects.Finish):
                     levelManager.LoadEndScreen(LevelManager.GameState.Won);
                     break;
 
                 default:
-                    // Some unexpected collission should reset the whole game.
-                    SceneManager.LoadScene("MainMenu");
+                    // Do nothing. E.g. at ceiling collision
                     break;
             }
         }

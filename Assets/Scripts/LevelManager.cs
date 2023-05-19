@@ -8,10 +8,11 @@ using UnityEngine.SceneManagement;
 public class LevelManager : MonoBehaviour
 {
     // GameObject the Plane can collide of.
-    // Floor  = Ground coliders game object
-    // Roof   = Top coliders game object
-    // Finish = Colider that indicates when a level is finished.
-    public enum CollisionObjects { Floor, Roof, Finish }
+    // Ground   = Ground coliders game object
+    // Item     = Collactable to refuel.
+    // Obstacle = Obstacle and ceiling game object
+    // Finish   = Colider that indicates when a level is finished.
+    public enum CollisionObjects { Ground, Item, Obstacle, Finish }
 
     // UI
     [SerializeField] GameObject fuelUI;
@@ -73,9 +74,9 @@ public class LevelManager : MonoBehaviour
         fuelUI.SetActive(false);
         endScreen.SetActive(true);
 
-        // deactivate all colliders beside flood
+        // deactivate all colliders beside ground
         foreach (Collider2D collider in colliders) {
-            if (collider.gameObject.tag != "Ground")
+            if (collider.gameObject.tag != nameof(CollisionObjects.Ground))
                 collider.enabled = false;
         }
     }
