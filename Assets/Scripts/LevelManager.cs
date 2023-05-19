@@ -51,6 +51,8 @@ public class LevelManager : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.R))
             MainMenu();
+        if(Input.GetKeyDown(KeyCode.Space) && (gameState != GameState.Playing))
+            RestartGame();
     }
 
     // Stop the game and show endscreen UI
