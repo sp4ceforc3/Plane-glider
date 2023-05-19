@@ -99,6 +99,7 @@ public class Plane : MonoBehaviour
                 //** Ground
                 case nameof(LevelManager.CollisionObjects.Ground):
                     levelManager.LoadEndScreen(LevelManager.GameState.Lose);
+                    planeSrc.mute = true;
                     break;
 
                 //** Items
@@ -109,11 +110,13 @@ public class Plane : MonoBehaviour
                 //** Obstacle
                 case nameof(LevelManager.CollisionObjects.Obstacle):
                     levelManager.LoadEndScreen(LevelManager.GameState.Lose);
+                    planeSrc.mute = true;
                     break;
 
                 //** Finish
                 case nameof(LevelManager.CollisionObjects.Finish):
                     levelManager.LoadEndScreen(LevelManager.GameState.Won);
+                    planeSrc.mute = true;
                     break;
 
                 default:
