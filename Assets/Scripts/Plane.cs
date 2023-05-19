@@ -19,13 +19,13 @@ public class Plane : MonoBehaviour
     [SerializeField] TextMeshProUGUI fuelText;
     [SerializeField] Image fuelBar;
     
-    Transform planeTransform;
-    Rigidbody2D rigBody;
-    SpriteRenderer sr;
-    float fuel = 1f;
+    private Transform planeTransform;
+    private Rigidbody2D rigBody;
+    private SpriteRenderer sr;
+    public float fuel = 1f;
 
-    float timer;
-    int spriteIndex = 0;
+    private float timer;
+    private int spriteIndex = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -99,7 +99,7 @@ public class Plane : MonoBehaviour
 
                 //** Items
                 case nameof(LevelManager.CollisionObjects.Item):
-                    // do refuel of fuel
+                    levelManager.HandleItem(collision.gameObject);
                     break;
 
                 //** Obstacle

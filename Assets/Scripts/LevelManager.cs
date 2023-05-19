@@ -24,6 +24,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] AudioSource sfxSrc;
     [SerializeField] AudioClip winningSound;
     [SerializeField] AudioClip losingSound;
+    [SerializeField] AudioClip collectSound;
 
     // Gamestates
     public enum GameState { Playing, Won, Lose }
@@ -55,6 +56,7 @@ public class LevelManager : MonoBehaviour
             MainMenu();
     }
 
+    // Stop the game and show endscreen UI
     public void LoadEndScreen(GameState state) 
     {
         gameState = state;
@@ -79,6 +81,19 @@ public class LevelManager : MonoBehaviour
             if (collider.gameObject.tag != nameof(CollisionObjects.Ground))
                 collider.enabled = false;
         }
+    }
+
+    // Handle Item collection
+    public void HandleItem(GameObject item) 
+    {
+        sfxSrc.PlayOneShot(collectSound);
+
+        if (item.GetComponent<Refueler>()) {
+            Refueler refueler = item.GetComponent<Refueler>();
+            refueler.Refuel();
+        }
+
+        Destroy(item);
     }
 
     // Restart Gane = Reset Scene

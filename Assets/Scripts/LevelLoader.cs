@@ -21,6 +21,10 @@ public class LevelLoader : MonoBehaviour
     [SerializeField] GameObject checkMarkLinusLevel;
     [SerializeField] GameObject checkMarkDomaiLevel;
 
+    // Audio
+    [SerializeField] AudioSource bgmSrc;
+    [SerializeField] AudioSource sfxSrc;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,10 +32,6 @@ public class LevelLoader : MonoBehaviour
         checkMarkLinusLevel.gameObject.SetActive(finishedLevel[Level.LinusLevel]);
         checkMarkDomaiLevel.gameObject.SetActive(finishedLevel[Level.DomaiLevel]);
     }
-    
-    // Audio
-    [SerializeField] AudioSource bgmSrc;
-    [SerializeField] AudioSource sfxSrc;
 
     // Start Game at UI Click in Main Menu.
     // int level = 
